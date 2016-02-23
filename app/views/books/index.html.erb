@@ -1,0 +1,11 @@
+<h1>Books#index</h1>
+<p>Find me in app/views/books/index.html.erb</p>
+<ul class="actions">
+    <li><%= link_to 'Add Book', new_book_path,
+      class: "btn btn-success" %></li>
+  </ul>
+
+
+<%= @books.each do |book| %>
+  <h3><%= book.title %></h3>
+<% end %>
