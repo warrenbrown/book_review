@@ -16,19 +16,12 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
 
- #attributes {
-  @extend .table;
-  @extend .table-condensed;
-  width: 65%;
-  th {
-   width: 35%;
-}
-  tr:first-child {
-   td, th {
-    border-top: 0px;
-   }
-}
-  td, th {
-   line-height: 24px !important;
- } 
-}
+ .book {
+   height: 350px;
+   width: 250px;
+ }
+
+ .book-show {
+   height: 475px;
+   width: 325px;
+ }

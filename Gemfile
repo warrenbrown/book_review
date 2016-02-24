@@ -35,7 +35,7 @@ gem 'devise_invitable'
 gem 'rolify'
 
 gem 'pundit'
-gem 'carrierwave', '~> 0.10.0'
+gem 'paperclip', '~> 4.3', '>= 4.3.5'
 group :development, :test do
   gem 'spring-commands-rspec'
   gem 'guard-rspec', require: false

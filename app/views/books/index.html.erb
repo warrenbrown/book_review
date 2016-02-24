@@ -3,18 +3,13 @@
 <% if @books.count == 0 %>
   <h1>There are no books!</h1>
 <% else %>
-  <% @books.each do |book| %>
-    <h3><%= link_to book.title, book %></h3>
-    <table id="attributes">
-     <tr>
-       <th>Book Reviewer: </th>
-       <td> <%= book.user.email %></td>
-     </tr>
-     <tr>
-       <th>Created:</th>
-       <td><%= time_ago_in_words(book.created_at) %> ago</td>
-       <td><%= book.category_id%></td>
-     </tr>
-  </table>
-  <% end %>
+  <div class="row">
+    <% @books.each do |book| %>
+    <div class="col-md-3">
+      <a href="/books/<%= book.id %> ">
+        <%= image_tag book.book_img.url(:book_index), class: 'book' %>
+      </a>
+    </div>
+    <% end %>
+  </div>
 <% end %>
