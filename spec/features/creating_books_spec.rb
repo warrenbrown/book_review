@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.feature 'users can create books' do
+  let(:user) { FactoryGirl.create(:user) }
+  before do
+    login_as(user)
+  end
   scenario 'with valid attributes' do
     visit '/'
     click_link 'Add Book'
@@ -11,7 +15,7 @@ RSpec.feature 'users can create books' do
     click_button 'Create Book'
 
     expect(page).to have_content 'Book has been created.'
-    expect(page).to have_content 'Makeover'
+    expect(page).to have_content "Book Reviewer #{user.email}"
   end
 
   scenario 'with invalid attributes' do
