@@ -5,10 +5,12 @@ class BooksController < ApplicationController
 
   def new
     @book = current_user.books.build
+    @categories = Category.all.map{ |c| [c.name, c.id] }
   end
 
   def create
     @book = current_user.books.build(book_params)
+    @book.category_id = params[:category_id]
     if @book.save
       flash[ notice ] = 'Book has been created.'
       redirect_to books_path
