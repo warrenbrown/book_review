@@ -1,4 +1,7 @@
 class BooksController < ApplicationController
+  before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user! , only: [ :new, :edit, :destroy ]
+
   def index
     if params[:category].blank?
       @books = Book.all.order("created_at DESC")
@@ -26,16 +29,21 @@ class BooksController < ApplicationController
   end
 
   def show
-    @book = Book.find(params[:id])
+    if @book.reviews.blank?
+      @average_review = 0
+    else
+      @average_review = @book.reviews.average(:rating).round(2)
+    end
+
   end
 
   def edit
-    @book = Book.find(params[:id])
+
     @categories = Category.all.map{ |c| [c.name, c.id] }
   end
 
   def update
-    @book = Book.find(params[:id])
+
     @book.category_id = params[:category_id]
     if @book.update(book_params)
       flash[ notice ] = 'Book has been updated.'
@@ -46,7 +54,7 @@ class BooksController < ApplicationController
   end
 
   def destroy
-    @book = Book.find(params[:id])
+
     @book.destroy
 
     flash[ notice ] = 'Book has been deleted.'
@@ -59,4 +67,8 @@ class BooksController < ApplicationController
   def book_params
     params.require(:book).permit(:title, :description, :author, :category_id, :book_img)
   end
+
+  def set_book
+		@book = Book.find(params[:id])
+	end
 end
